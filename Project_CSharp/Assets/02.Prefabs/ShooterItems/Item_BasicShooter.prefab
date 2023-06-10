@@ -76,7 +76,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 2747690628134850419, guid: b670ab75dde984907b8570040daa08c5, type: 3}
-  m_Color: {r: 0.759434, g: 0.9861643, b: 1, a: 1}
+  m_Color: {r: 0.5990566, g: 0.9737087, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -99,7 +99,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shooterPrefab: {fileID: 6411727977494598374, guid: 6383f91c75ef95d4aa20c6147e81aaec, type: 3}
-  speed: 1
+  speed: 0.7
 --- !u!58 &4087448184813005700
 CircleCollider2D:
   m_ObjectHideFlags: 0
