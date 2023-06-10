@@ -4858,7 +4858,7 @@ GameObject:
   - component: {fileID: 8251806335883253726}
   m_Layer: 0
   m_Name: Enemy_BasicShooter3
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4944,7 +4944,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48865463cc0dc7d4e9075f06b3747be9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hp: 7
+  hp: 20
   speed: 0.6
   destroyEffect: {fileID: 3147687137352612683, guid: 318c4f4fc2d6c9242981cc3230560161, type: 3}
   bullet: {fileID: 7474303994010707229, guid: 2c795acfd7e834e4eae83e6805e9ef11, type: 3}

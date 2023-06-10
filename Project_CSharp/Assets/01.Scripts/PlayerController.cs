@@ -9,6 +9,37 @@ public class PlayerController : MonoBehaviour
     public float speed = 2f;
     public float fowardSpeedAmount = 0.2f;
 
+    float maxShootingGauge = 100f;
+    public float MaxShootingGauge
+    {
+        get { return maxShootingGauge; }
+    }
+
+    float shootingGauge;
+    public float ShootingGauge
+    {
+        get { return shootingGauge; }
+        set
+        {
+            if (value < 0f) shootingGauge = 0f;
+            else if (value > maxShootingGauge) shootingGauge = maxShootingGauge;
+            else shootingGauge = value;
+        }
+    }
+    public bool isShootingGaugeExist
+    {
+        get
+        {
+            if (shootingGauge > 0) return true;
+            else return false;
+        }
+    }
+
+    public float gaugeDecreaseRate = 5f;
+    public float gaugeIncreaseRate = 3f;
+
+    List<Shooter> shooters = new List<Shooter>();
+
     Vector2 moveDir = new Vector2();
 
     Rigidbody2D rb;
@@ -17,12 +48,14 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+
+        shooters.Add(GetComponentInChildren<Shooter>());
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        CheckShootingGauge();
     }
 
     private void FixedUpdate()
@@ -41,6 +74,66 @@ public class PlayerController : MonoBehaviour
 
         rb.MovePosition(rb.position + moveDir * speed * Time.deltaTime);
     } 
+
+    void CheckShootingGauge()
+    {
+        if (Input.GetKey(KeyCode.Space))
+        {
+            ShootingGauge -= gaugeDecreaseRate * Time.deltaTime;
+        }
+        else
+        {
+            ShootingGauge += gaugeIncreaseRate * Time.deltaTime;
+        }
+    }
+
+    protected void CreateShooter(GameObject shooterObj)
+    {
+        GameObject obj = Instantiate(shooterObj, transform.position, Quaternion.identity);
+
+        Shooter shooter = obj.GetComponent<Shooter>();
+
+        obj.transform.parent = transform;
+
+        shooters.Add(shooter);
+    }
+
+    public void AddShooter(GameObject shooterObj)
+    {
+        Debug.Log("Add");
+
+        Shooter shooterClass = shooterObj.GetComponent<Shooter>();
+
+        foreach(Shooter s in shooters)
+        {
+            if(s.shooterName == shooterClass.shooterName)
+            {
+                UpgradeShooter(s);
+                return;
+            }
+        }
+
+        CreateShooter(shooterObj);
+    }
+
+    protected void DeleteShooter(Shooter shooter)
+    {
+        shooters.Remove(shooter);
+
+        Destroy(shooter.gameObject);
+    }
+
+    protected void UpgradeShooter(Shooter shooter)
+    {
+        Debug.Log("Upgrade");
+
+        GameObject upgrade = shooter.nextLevelShooter;
+        if (upgrade == null) return;
+
+        DeleteShooter(shooter);
+
+        CreateShooter(upgrade);
+    }
 
     public void Damage()
     {

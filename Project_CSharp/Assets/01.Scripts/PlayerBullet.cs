@@ -2,11 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CEnemyBullet : MonoBehaviour
+public class PlayerBullet : MonoBehaviour
 {
-    public Vector3 movePos = Vector3.down;
+    public Vector3 moveDir = Vector3.up;
 
-    public float speed;
+    public float speed = 2f;
+
+    public float damage = 3f;
 
     protected bool isDestroyed = false;
 
@@ -26,14 +28,14 @@ public class CEnemyBullet : MonoBehaviour
 
     protected void Move()
     {
-        transform.position = transform.position + movePos * speed * Time.deltaTime;
+        transform.position = transform.position + moveDir * speed * Time.deltaTime;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Player"))
+        if (collision.CompareTag("Enemy"))
         {
-            collision.GetComponent<PlayerController>().Damage();
+            collision.GetComponent<EnemyController>().Damage(damage);
 
             DestroyBullet();
         }
@@ -49,7 +51,7 @@ public class CEnemyBullet : MonoBehaviour
 
     protected void CheckEndOfArea()
     {
-        if (transform.position.y < -12f)
+        if (transform.position.y < -12f || transform.position.y > 12f)
         {
             Destroy(this.gameObject);
             isDestroyed = true;

@@ -15,6 +15,10 @@ public class Enemy_MultiShooter : Enemy_Shooter
             return;
         }
 
+        Vector3 dir = playerPos.position - transform.position;
+        dir.z = 0;
+        dir.Normalize();
+
         float startAngle = -bulletAngle / 2f;
         float angleAmount = bulletAngle / (bulletCount - 1);
 
@@ -22,7 +26,7 @@ public class Enemy_MultiShooter : Enemy_Shooter
         {
             CEnemyBullet bulletComponent = Instantiate(bullet, shootPos.position, Quaternion.identity).GetComponent<CEnemyBullet>();
 
-            bulletComponent.movePos = Quaternion.Euler(0, 0, startAngle + angleAmount * i) * Vector3.down;
+            bulletComponent.movePos = Quaternion.Euler(0, 0, startAngle + angleAmount * i) * dir;
         }
     }
 }

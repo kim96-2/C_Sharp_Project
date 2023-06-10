@@ -10,11 +10,15 @@ public class Enemy_Shooter : EnemyController
 
     public float shootDelay = 2f;
 
+    protected Transform playerPos;
+
     protected override void Init()
     {
         base.Init();
 
         StartCoroutine("Shooting");
+
+        playerPos = GameObject.FindWithTag("Player").transform;
     }
 
     protected virtual IEnumerator Shooting()
@@ -23,15 +27,20 @@ public class Enemy_Shooter : EnemyController
         {
             yield return new WaitForSeconds(shootDelay);
 
-            Shoot();
+            if(playerPos.position.y < transform.position.y - 5f) Shoot();
+
         }
     }
 
     protected virtual void Shoot()
     {
+        Vector3 dir = playerPos.position - transform.position;
+        dir.z = 0;
+        dir.Normalize();
+
         CEnemyBullet bulletComponent =  Instantiate(bullet,shootPos.position,Quaternion.identity).GetComponent<CEnemyBullet>();
 
-        bulletComponent.movePos = Vector3.down;
+        bulletComponent.movePos = dir;
     }
     
 }
