@@ -12,6 +12,8 @@ public class EnemyController : MonoBehaviour
 
     Rigidbody2D rb;
 
+    Material mt;
+
     protected bool isDestroyed = false;
 
     // Start is called before the first frame update
@@ -23,6 +25,7 @@ public class EnemyController : MonoBehaviour
     protected virtual void Init()
     {
         rb = GetComponent<Rigidbody2D>();
+        mt = GetComponent<Renderer>().material;
     }
 
     // Update is called once per frame
@@ -65,6 +68,9 @@ public class EnemyController : MonoBehaviour
         hp -= damage;
 
         if (hp <= 0) DestroyEnemy();
+
+        StopCoroutine("DamageEffect");
+        StartCoroutine("DamageEffect");
     }
 
     protected virtual void DestroyEnemy()
@@ -76,5 +82,14 @@ public class EnemyController : MonoBehaviour
         Destroy(effect, 2f);
 
         Destroy(this.gameObject);
+    }
+
+    IEnumerator DamageEffect()
+    {
+        mt.SetFloat("_Hit_Amount", 1f);
+
+        yield return new WaitForSeconds(0.4f);
+
+        mt.SetFloat("_Hit_Amount", 0f);
     }
 }

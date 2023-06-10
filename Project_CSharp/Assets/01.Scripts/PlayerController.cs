@@ -44,10 +44,14 @@ public class PlayerController : MonoBehaviour
 
     Rigidbody2D rb;
 
+    Material material;
+
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+
+        material = GetComponent<Renderer>().material;
 
         shooters.Add(GetComponentInChildren<Shooter>());
     }
@@ -137,7 +141,19 @@ public class PlayerController : MonoBehaviour
 
     public void Damage()
     {
-
         hp -= 1;
+
+        StopCoroutine("DamageEffect");
+
+        StartCoroutine("DamageEffect");
+    }
+
+    IEnumerator DamageEffect()
+    {
+        material.SetFloat("_Hit_Amount", 1f);
+
+        yield return new WaitForSeconds(0.6f);
+
+        material.SetFloat("_Hit_Amount", 0f);
     }
 }
