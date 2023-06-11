@@ -142,10 +142,23 @@ public class PlayerController : MonoBehaviour
     public void Damage()
     {
         hp -= 1;
+        if (hp <= 0) PlayerGameOver();
 
         StopCoroutine("DamageEffect");
 
         StartCoroutine("DamageEffect");
+    }
+
+    protected void PlayerGameOver()
+    {
+        GameObject.FindWithTag("GameController").GetComponent<GameManager>().GameOver();
+        transform.Find("Booster").gameObject.SetActive(false);
+
+        GetComponent<Collider2D>().enabled = false;
+
+        GetComponent<SpriteRenderer>().enabled = false;
+
+        Destroy(this);
     }
 
     IEnumerator DamageEffect()

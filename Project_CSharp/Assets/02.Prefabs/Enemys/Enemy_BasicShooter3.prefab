@@ -4944,12 +4944,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48865463cc0dc7d4e9075f06b3747be9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hp: 20
+  hp: 14
   speed: 0.6
   destroyEffect: {fileID: 3147687137352612683, guid: 318c4f4fc2d6c9242981cc3230560161, type: 3}
   bullet: {fileID: 7474303994010707229, guid: 2c795acfd7e834e4eae83e6805e9ef11, type: 3}
   shootPos: {fileID: 6183715335323436244}
-  shootDelay: 4
+  shootDelay: 5
   bulletCount: 3
   bulletAngle: 30
 --- !u!50 &8251806335883253722

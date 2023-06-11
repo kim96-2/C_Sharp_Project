@@ -101,7 +101,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9365524b14390bd49b2347e15a0e0387, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hp: 30
+  hp: 20
   speed: 0.8
   destroyEffect: {fileID: 3147687137352612683, guid: 318c4f4fc2d6c9242981cc3230560161, type: 3}
   spawnEnemy: {fileID: 6718222272543394170, guid: 51450a66cb2f8ab4fbe12a93c4c99585, type: 3}

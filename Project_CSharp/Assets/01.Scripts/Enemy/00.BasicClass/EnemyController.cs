@@ -8,7 +8,11 @@ public class EnemyController : MonoBehaviour
 
     public float speed = 2f;
 
+    public float destroyedScore = 10f;
+
     public GameObject destroyEffect;
+
+    GameManager gameManager;
 
     Rigidbody2D rb;
 
@@ -24,6 +28,8 @@ public class EnemyController : MonoBehaviour
 
     protected virtual void Init()
     {
+        gameManager = GameObject.FindWithTag("GameController").GetComponent<GameManager>();
+
         rb = GetComponent<Rigidbody2D>();
         mt = GetComponent<Renderer>().material;
     }
@@ -77,6 +83,8 @@ public class EnemyController : MonoBehaviour
     {
         if (isDestroyed) return;
         isDestroyed = true;
+
+        gameManager.EnemyDestroyed(destroyedScore);
 
         GameObject effect = Instantiate(destroyEffect, transform.position, Quaternion.identity);
         Destroy(effect, 2f);
