@@ -23,6 +23,8 @@ public class Enemy_Shooter : EnemyController
 
     protected virtual IEnumerator Shooting()
     {
+        yield return new WaitForSeconds(Random.Range(0f,shootDelay/2f));
+
         while (true)
         {
             yield return new WaitForSeconds(shootDelay);

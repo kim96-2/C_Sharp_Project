@@ -31,9 +31,7 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        StartCoroutine("CreateEnemys");
-
-        StartCoroutine("CreateItems");
+        
     }
 
     // Update is called once per frame
@@ -124,6 +122,13 @@ public class GameManager : MonoBehaviour
     {
         this.score += score;
 
+    }
+
+    public void StartGame()
+    {
+        StartCoroutine("CreateEnemys");
+
+        StartCoroutine("CreateItems");
     }
 
     public void GameOver()
